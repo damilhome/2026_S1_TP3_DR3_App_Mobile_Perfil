@@ -16,6 +16,7 @@ export default function Perfil() {
         tabBarStyle: {
           backgroundColor: "#1e293b",
           borderColor: "#334155",
+          borderTopWidth: 4,
           paddingTop: 5,
           height: "10%",
           alignItems: "center",
@@ -45,8 +46,8 @@ export default function Perfil() {
         },
       })}
     >
-      <Tab.Screen name="Qualificacoes" component={Qualificacoes} />
       <Tab.Screen name="Projetos" component={Projetos} />
+      <Tab.Screen name="Qualificacoes" component={Qualificacoes} />
       <Tab.Screen name="Candidaturas" component={Candidaturas} />
       <Tab.Screen name="Artigos" component={Artigos} />
     </Tab.Navigator>
