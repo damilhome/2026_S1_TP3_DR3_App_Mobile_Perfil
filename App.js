@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./screens/Home.jsx";
 import Perfil from "./screens/Perfil.jsx";
-import Detalhes from "./screens/Detalhes.jsx";
+import Detalhes from "./screens/DetalhesProjetos.jsx";
 
 const Stack = createStackNavigator();
 
