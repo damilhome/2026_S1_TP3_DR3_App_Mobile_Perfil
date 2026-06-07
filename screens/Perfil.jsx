@@ -24,15 +24,15 @@ export default function Perfil() {
         tabBarActiveTintColor: "#3b82f6",
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if (route.name === "Qualificacoes") {
+          if (route.name === "QualificacoesTab") {
             iconName = focused ? "certificate" : "certificate-outline";
-          } else if (route.name === "Projetos") {
+          } else if (route.name === "ProjetosTab") {
             iconName = focused
               ? "projector-screen"
               : "projector-screen-outline";
-          } else if (route.name === "Candidaturas") {
+          } else if (route.name === "CandidaturasTab") {
             iconName = focused ? "account-network" : "account-network-outline";
-          } else if (route.name === "Artigos") {
+          } else if (route.name === "ArtigosTab") {
             iconName = focused ? "card-text" : "card-text-outline";
           } else if (route.name === "Configuracoes") {
             iconName = focused
@@ -46,10 +46,10 @@ export default function Perfil() {
         },
       })}
     >
-      <Tab.Screen name="Projetos" component={Projetos} />
-      <Tab.Screen name="Qualificacoes" component={Qualificacoes} />
-      <Tab.Screen name="Candidaturas" component={Candidaturas} />
-      <Tab.Screen name="Artigos" component={Artigos} />
+      <Tab.Screen name="ProjetosTab" component={Projetos} />
+      <Tab.Screen name="QualificacoesTab" component={Qualificacoes} />
+      <Tab.Screen name="CandidaturasTab" component={Candidaturas} />
+      <Tab.Screen name="ArtigosTab" component={Artigos} />
     </Tab.Navigator>
   );
 }

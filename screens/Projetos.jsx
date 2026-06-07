@@ -29,6 +29,7 @@ export default function Projetos() {
           renderItem={({ item }) => <CardProjetos item={item} />}
         />
       )}
+      {erro && <Text style={styles.erro}>{erro}</Text>}
     </View>
   );
 }
@@ -51,5 +52,8 @@ const styles = StyleSheet.create({
   listaContainer: {
     width: "100%",
     gap: 15,
+  },
+  erro: {
+    color: "red",
   },
 });

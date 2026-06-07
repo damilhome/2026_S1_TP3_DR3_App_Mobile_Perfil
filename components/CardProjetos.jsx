@@ -1,19 +1,21 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-function formatarDataCriadoEm(data) {
-  let partes = data.split("-");
-  let dia = partes[2].split("T");
-  return `${dia[0]}/${partes[1]}/${partes[0]}`;
-}
+import { formatarDataCriadoEm } from "../utils/formatacao";
 
 export default function CardProjetos({ item }) {
+  const navigation = useNavigation();
+
   return (
     <Pressable
       style={({ pressed }) => [
         styles.cardContainer,
         { backgroundColor: pressed ? "#2c3a50" : "#1e293b" },
       ]}
+      onPress={() =>
+        navigation.navigate("DetalhesScreen", { projetoId: item.id })
+      }
     >
       <View style={styles.infoContainer}>
         <Text style={styles.tituloProjeto}>{item.name}</Text>
