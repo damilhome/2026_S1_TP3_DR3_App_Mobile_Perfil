@@ -14,7 +14,7 @@ export default function CardProjetos({ item }) {
         { backgroundColor: pressed ? "#2c3a50" : "#1e293b" },
       ]}
       onPress={() =>
-        navigation.navigate("DetalhesScreen", { projetoId: item.id })
+        navigation.navigate("DetalhesProjetos", { projetoId: item.id })
       }
     >
       <View style={styles.infoContainer}>

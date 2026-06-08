@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
             backgroundColor: pressed ? "#3b82f6" : "#2563eb",
           },
         ]}
-        onPress={() => navigation.navigate("PerfilTabs")}
+        onPress={() => navigation.navigate("Perfil")}
       >
         <Text style={styles.txtBtn}>Ver perfil completo</Text>
       </Pressable>
