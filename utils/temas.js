@@ -1,0 +1,33 @@
+export const temaEscuro = {
+  corDeFundo: "#0f172a",
+  textoPrincipal: "#f8fafc",
+  textoSecundario: "#94a3b8",
+  cards: "#1e293b",
+  cardsPressionado: "#2c3a50",
+  borda: "#334155",
+  botao: "#2563eb",
+  botaoPressionado: "#3b82f6",
+  aprovado: "#008000",
+  aprovadoPressionado: "#2e962e",
+  rejeitado: "#ff0000",
+  rejeitadoPressionado: "#e74747",
+  outrosStatus: "#ffff00",
+  outrosStatusPressionado: "#e9e93c",
+};
+
+export const temaClaro = {
+  corDeFundo: "#f1f5f9",
+  textoPrincipal: "#0f172a",
+  textoSecundario: "#64748b",
+  cards: "#ffffff",
+  cardsPressionado: "#e2e8f0",
+  borda: "#cbd5e1",
+  botao: "#2563eb",
+  botaoPressionado: "#1d4ed8",
+  aprovado: "#16a34a",
+  aprovadoPressionado: "#15803d",
+  rejeitado: "#dc2626",
+  rejeitadoPressionado: "#b91c1c",
+  outrosStatus: "#eab308",
+  outrosStatusPressionado: "#ca8a04",
+};

@@ -9,17 +9,21 @@ import {
 
 import useFetch from "../hooks/useFetch";
 import CardArtigo from "../components/CardArtigo";
+import { useTema } from "../contexts/TemaContext";
 
 const URL = "https://dev.to/api/articles?username=webdeveloperhyper";
 
 export default function Artigos() {
   const { dados, erro, carregando } = useFetch(URL);
+  const { cores } = useTema();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       <View style={styles.titleContainer}>
-        <Text style={styles.tituloSecao}>Artigos no Dev.to</Text>
-        <Text style={styles.observacao}>
+        <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+          Artigos no Dev.to
+        </Text>
+        <Text style={[styles.observacao, { color: cores.textoSecundario }]}>
           Todos os artigos nesta aba são do perfil "webdeveloperhyper"
         </Text>
       </View>
@@ -41,7 +45,6 @@ export default function Artigos() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f172a",
     paddingHorizontal: 24,
     paddingTop: 24,
     gap: 28,
@@ -50,13 +53,11 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tituloSecao: {
-    color: "#f8fafc",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
   },
   observacao: {
-    color: "#94a3b8",
     fontSize: 14,
     fontStyle: "italic",
     textAlign: "center",

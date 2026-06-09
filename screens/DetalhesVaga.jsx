@@ -8,10 +8,12 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { salvarVaga } from "../utils/asyncStorage";
+import { useTema } from "../contexts/TemaContext";
 import descobrirCorBadge from "../utils/descobrirCorBadge";
 
 export default function DetalhesVaga({ route }) {
   const { detalhesItem, setCandidaturas } = route.params;
+  const { cores } = useTema();
   const [vaga, setVaga] = useState(detalhesItem);
   const corFundoBtn = descobrirCorBadge(vaga.status);
 
@@ -35,31 +37,39 @@ export default function DetalhesVaga({ route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.cardContainer}
       >
         <View>
-          <Text style={styles.tituloSecao}>{vaga.cargo}</Text>
-          <Text style={styles.empresa}>{vaga.empresa}</Text>
-          <Text style={styles.paragrafo}>
+          <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+            {vaga.cargo}
+          </Text>
+          <Text style={[styles.empresa, { color: cores.textoPrincipal }]}>
+            {vaga.empresa}
+          </Text>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
             Data de publicação: {vaga.dataPublicacao}
           </Text>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.subTitutlo}>Sobre a vaga:</Text>
+          <Text style={[styles.subTitutlo, { color: cores.textoPrincipal }]}>
+            Sobre a vaga:
+          </Text>
           <View style={styles.infos}>
-            <Text style={styles.paragrafo}>{vaga.descricao}</Text>
-            <Text style={styles.paragrafo}>
+            <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
+              {vaga.descricao}
+            </Text>
+            <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
               <Text style={styles.realce}>Localização da vaga:</Text>{" "}
               {vaga.localizacao}
             </Text>
-            <Text style={styles.paragrafo}>
+            <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
               <Text style={styles.realce}>Requisitos:</Text>{" "}
               {vaga.requisitos.join(", ")}
             </Text>
-            <Text style={styles.paragrafo}>
+            <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
               <Text style={styles.realce}>Salário:</Text> {vaga.salario}
             </Text>
           </View>
@@ -70,20 +80,31 @@ export default function DetalhesVaga({ route }) {
           disabled={vaga.status === "Vaga Divulgada" ? false : true}
           style={({ pressed }) => [
             styles.btn,
-            { backgroundColor: pressed ? corFundoBtn[1] : corFundoBtn[0] },
+            {
+              backgroundColor: pressed
+                ? cores[corFundoBtn[1]]
+                : cores[corFundoBtn[0]],
+            },
           ]}
           onPress={() => atualizarStatus()}
         >
           <Text
             style={[
               styles.btnTxt,
-              { color: corFundoBtn[0] === "#ffff00" ? "#0f172a" : "#f8fafc" },
+              {
+                color:
+                  corFundoBtn[0] === "outrosStatus"
+                    ? "#0f172a"
+                    : cores.textoPrincipal,
+              },
             ]}
           >
             {vaga.status === "Vaga Divulgada" ? "Candidatar-se" : vaga.status}
           </Text>
         </Pressable>
-        <Text style={styles.candidatoTxt}>{vaga.feedback}</Text>
+        <Text style={[styles.candidatoTxt, { color: cores.textoSecundario }]}>
+          {vaga.feedback}
+        </Text>
       </View>
     </View>
   );
@@ -94,7 +115,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     gap: 8,
-    backgroundColor: "#0f172a",
     paddingHorizontal: 24,
     paddingTop: 24,
     paddingBottom: 35,
@@ -103,20 +123,17 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   tituloSecao: {
-    color: "#f8fafc",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "left",
   },
   empresa: {
-    color: "#f8fafc",
     fontSize: 18,
   },
   infoContainer: {
     gap: 8,
   },
   subTitutlo: {
-    color: "#f8fafc",
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -124,7 +141,6 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   paragrafo: {
-    color: "#94a3b8",
     fontSize: 18,
   },
   realce: {
@@ -139,12 +155,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   btnTxt: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 16,
   },
   candidatoTxt: {
-    color: "#94a3b8",
     fontSize: 16,
     textAlign: "center",
   },

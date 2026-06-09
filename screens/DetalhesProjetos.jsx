@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 import CardDetalhesProjetos from "../components/CardDetalhesProjetos";
+import { useTema } from "../contexts/TemaContext";
 
 const URL_PARCIAL = "https://api.github.com/repositories/";
 
 export default function Detalhes({ route }) {
   const { projetoId } = route.params;
+  const { cores } = useTema();
 
   const [dados, setDados] = useState({});
   const [erro, setErro] = useState("");
@@ -36,13 +38,13 @@ export default function Detalhes({ route }) {
   }, [projetoId]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       {carregando ? (
-        <ActivityIndicator size="large" color="#3b82f6" />
+        <ActivityIndicator size="large" color={cores.botao} />
       ) : (
         <CardDetalhesProjetos dados={dados} />
       )}
-      {erro && <Text style={styles.erro}>{erro}</Text>}
+      {erro && <Text style={{ color: cores.rejeitado }}>{erro}</Text>}
     </View>
   );
 }
@@ -50,12 +52,8 @@ export default function Detalhes({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f172a",
     paddingHorizontal: 24,
     paddingTop: 24,
     gap: 8,
-  },
-  erro: {
-    color: "red",
   },
 });

@@ -6,10 +6,13 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import { useTema } from "../contexts/TemaContext";
 
 export default function Home({ navigation }) {
+  const { cores } = useTema();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       <ScrollView
         contentContainerStyle={styles.perfilContainer}
         showsVerticalScrollIndicator={false}
@@ -20,24 +23,28 @@ export default function Home({ navigation }) {
             style={styles.imagem}
           />
           <View style={styles.tituloContainer}>
-            <Text style={styles.nome}>Danilo Almeida Milhome</Text>
-            <Text style={styles.titulo}>Desenvolvedor Full Stack</Text>
+            <Text style={[styles.nome, { color: cores.textoPrincipal }]}>
+              Danilo Almeida Milhome
+            </Text>
+            <Text style={[styles.titulo, { color: cores.textoPrincipal }]}>
+              Desenvolvedor Full Stack
+            </Text>
           </View>
         </View>
         <View style={styles.descricaoContainer}>
-          <Text style={styles.descricao}>
+          <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
             aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
             dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
             laboriosam recusandae esse.
           </Text>
-          <Text style={styles.descricao}>
+          <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
             aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
             dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
             laboriosam recusandae esse.
           </Text>
-          <Text style={styles.descricao}>
+          <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
             aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
             dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
@@ -54,7 +61,9 @@ export default function Home({ navigation }) {
         ]}
         onPress={() => navigation.navigate("Perfil")}
       >
-        <Text style={styles.txtBtn}>Ver perfil completo</Text>
+        <Text style={[styles.txtBtn, { color: cores.textoPrincipal }]}>
+          Ver perfil completo
+        </Text>
       </Pressable>
     </View>
   );
@@ -64,7 +73,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    backgroundColor: "#0f172a",
     paddingHorizontal: 24,
     paddingBottom: 36,
     gap: 8,
@@ -90,18 +98,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#f8fafc",
   },
   titulo: {
     fontStyle: "italic",
-    color: "#f8fafc",
   },
   descricaoContainer: {
     gap: 10,
   },
   descricao: {
     textAlign: "justify",
-    color: "#f8fafc",
   },
   btn: {
     paddingVertical: 10,
@@ -110,6 +115,5 @@ const styles = StyleSheet.create({
   },
   txtBtn: {
     fontWeight: "bold",
-    color: "#f8fafc",
   },
 });

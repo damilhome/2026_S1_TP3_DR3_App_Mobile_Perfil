@@ -5,23 +5,27 @@ import Qualificacoes from "./Qualificacoes.jsx";
 import Projetos from "./Projetos.jsx";
 import Candidaturas from "./Candidaturas.jsx";
 import Artigos from "./Artigos.jsx";
+import Configuracoes from "./Configuracoes.jsx";
+import { useTema } from "../contexts/TemaContext.js";
 
 const Tab = createBottomTabNavigator();
 
 export default function Perfil() {
+  const { cores } = useTema();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: "#1e293b",
-          borderColor: "#334155",
+          backgroundColor: cores.cards,
+          borderColor: cores.borda,
           borderTopWidth: 4,
           paddingTop: 5,
           height: "10%",
           alignItems: "center",
         },
-        tabBarActiveTintColor: "#3b82f6",
+        tabBarActiveTintColor: cores.botao,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Qualificacoes") {
@@ -50,6 +54,7 @@ export default function Perfil() {
       <Tab.Screen name="Projetos" component={Projetos} />
       <Tab.Screen name="Candidaturas" component={Candidaturas} />
       <Tab.Screen name="Artigos" component={Artigos} />
+      <Tab.Screen name="Configuracoes" component={Configuracoes} />
     </Tab.Navigator>
   );
 }

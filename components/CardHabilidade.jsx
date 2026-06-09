@@ -7,21 +7,29 @@ import {
   Pressable,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTema } from "../contexts/TemaContext";
 
 export default function CardHabilidade({ qualificacao }) {
+  const { cores } = useTema();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       <View style={styles.habilidadeContainer}>
         <MaterialCommunityIcons
           name={qualificacao.logo}
           size={28}
-          color="#2563eb"
+          color={cores.botao}
         />
-        <Text style={styles.habilidade}>{qualificacao.habilidade}</Text>
+        <Text style={[styles.habilidade, { color: cores.textoPrincipal }]}>
+          {qualificacao.habilidade}
+        </Text>
       </View>
       <View style={styles.certificacaoContainer}>
         {qualificacao.certificacoes.map((cert, index) => (
-          <Text key={index} style={styles.certificacao}>
+          <Text
+            key={index}
+            style={[styles.certificacao, { color: cores.textoPrincipal }]}
+          >
             - {cert}
           </Text>
         ))}
@@ -32,7 +40,6 @@ export default function CardHabilidade({ qualificacao }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#0f172a",
     gap: 5,
   },
   habilidadeContainer: {
@@ -41,7 +48,6 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   habilidade: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 24,
   },
@@ -49,7 +55,6 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   certificacao: {
-    color: "#f8fafc",
     fontSize: 16,
   },
 });

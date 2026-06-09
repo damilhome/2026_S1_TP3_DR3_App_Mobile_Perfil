@@ -1,4 +1,4 @@
-export default function descobrirCorBadge(status) {
+/* export default function descobrirCorBadge(status) {
   if (status === "Vaga Divulgada") {
     return ["#2563eb", "#3b82f6"];
   } else if (status === "Aprovado") {
@@ -7,5 +7,17 @@ export default function descobrirCorBadge(status) {
     return ["#ff0000", "#e74747"];
   } else {
     return ["#ffff00", "#e9e93c"];
+  }
+} */
+
+export default function descobrirCorBadge(status) {
+  if (status === "Vaga Divulgada") {
+    return ["botao", "botaoPressionado"];
+  } else if (status === "Aprovado") {
+    return ["aprovado", "aprovadoPressionado"];
+  } else if (status === "Rejeitado") {
+    return ["rejeitado", "rejeitadoPressionado"];
+  } else {
+    return ["outrosStatus", "outrosStatusPressionado"];
   }
 }

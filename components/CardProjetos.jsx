@@ -3,27 +3,31 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { formatarDataCriadoEm } from "../utils/formatacao";
+import { useTema } from "../contexts/TemaContext";
 
 export default function CardProjetos({ item }) {
   const navigation = useNavigation();
+  const { cores } = useTema();
 
   return (
     <Pressable
       style={({ pressed }) => [
         styles.cardContainer,
-        { backgroundColor: pressed ? "#2c3a50" : "#1e293b" },
+        { backgroundColor: pressed ? cores.cardsPressionado : cores.cards },
       ]}
       onPress={() =>
         navigation.navigate("DetalhesProjetos", { projetoId: item.id })
       }
     >
       <View style={styles.infoContainer}>
-        <Text style={styles.tituloProjeto}>{item.name}</Text>
-        <Text style={styles.paragrafo}>
+        <Text style={[styles.tituloProjeto, { color: cores.textoPrincipal }]}>
+          {item.name}
+        </Text>
+        <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
           Criado em: {formatarDataCriadoEm(item.created_at)}
         </Text>
       </View>
-      <MaterialIcons name="arrow-right" size={40} color="#3b82f6" />
+      <MaterialIcons name="arrow-right" size={40} color={cores.botao} />
     </Pressable>
   );
 }
@@ -43,12 +47,10 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   tituloProjeto: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 18,
   },
   paragrafo: {
-    color: "#94a3b8",
     fontSize: 16,
   },
 });

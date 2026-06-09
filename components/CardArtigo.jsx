@@ -1,18 +1,19 @@
 import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { traduzirData } from "../utils/formatacao";
+import { useTema } from "../contexts/TemaContext";
 
 export default function CardArtigo({ item }) {
   const navigation = useNavigation();
+  const { cores } = useTema();
 
   return (
     <Pressable
       style={({ pressed }) => [
         styles.cardContainer,
-        { backgroundColor: pressed ? "#2c3a50" : "#1e293b" },
+        { backgroundColor: pressed ? cores.cardsPressionado : cores.cards },
       ]}
       onPress={() =>
-        /* TODO: Concertar página de navegação */
         navigation.navigate("DetalhesArtigo", { idArtigo: item.id })
       }
     >
@@ -22,24 +23,32 @@ export default function CardArtigo({ item }) {
           style={styles.imagemPerfil}
         />
         <View style={styles.usuario}>
-          <Text style={styles.nomeUsuario}>{item.user.name}</Text>
-          <Text style={styles.publicacao}>
+          <Text style={[styles.nomeUsuario, { color: cores.textoPrincipal }]}>
+            {item.user.name}
+          </Text>
+          <Text style={{ color: cores.textoSecundario }}>
             {traduzirData(item.readable_publish_date)}
           </Text>
         </View>
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.tituloProjeto}>{item.title}</Text>
-        <Text style={styles.infos}>#{item.tag_list.join(" #")}</Text>
+        <Text style={[styles.tituloProjeto, { color: cores.textoPrincipal }]}>
+          {item.title}
+        </Text>
+        <Text style={[styles.infos, { color: cores.textoSecundario }]}>
+          #{item.tag_list.join(" #")}
+        </Text>
       </View>
       <View style={styles.reacoesContainer}>
         <View style={styles.reacoes}>
-          <Text style={styles.infos}>
+          <Text style={[styles.infos, { color: cores.textoSecundario }]}>
             {item.public_reactions_count} reações
           </Text>
-          <Text style={styles.infos}>{item.comments_count} comentários</Text>
+          <Text style={[styles.infos, { color: cores.textoSecundario }]}>
+            {item.comments_count} comentários
+          </Text>
         </View>
-        <Text style={styles.infos}>
+        <Text style={[styles.infos, { color: cores.textoSecundario }]}>
           Leitura: {item.reading_time_minutes} min
         </Text>
       </View>
@@ -63,23 +72,17 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   nomeUsuario: {
-    color: "#f8fafc",
     fontWeight: "bold",
-  },
-  publicacao: {
-    color: "#94a3b8",
   },
   infoContainer: {
     flex: 1,
     gap: 4,
   },
   tituloProjeto: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 18,
   },
   infos: {
-    color: "#94a3b8",
     fontSize: 14,
   },
   reacoesContainer: {
@@ -89,9 +92,5 @@ const styles = StyleSheet.create({
   reacoes: {
     flexDirection: "row",
     gap: 8,
-  },
-  paragrafo: {
-    color: "#94a3b8",
-    fontSize: 16,
   },
 });

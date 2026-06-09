@@ -1,24 +1,29 @@
 import { StyleSheet, Text, View, Pressable, Linking } from "react-native";
 import { formatarDataCriadoEm } from "../utils/formatacao";
+import { useTema } from "../contexts/TemaContext";
 
 export default function CardDetalhesProjetos({ dados }) {
+  const { cores } = useTema();
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.infoContainer}>
-        <Text style={styles.tituloSecao}>{dados.name}</Text>
+        <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+          {dados.name}
+        </Text>
         <View style={styles.detalhesContainer}>
-          <Text style={styles.paragrafo}>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
             <Text style={styles.realce}>Criado em:</Text>{" "}
             {formatarDataCriadoEm(dados.created_at)}
           </Text>
-          <Text style={styles.paragrafo}>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
             <Text style={styles.realce}>Autor:</Text> {dados.owner.login}
           </Text>
-          <Text style={styles.paragrafo}>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
             <Text style={styles.realce}>Linguagens utilizadas:</Text>{" "}
             {Object.keys(dados.linguagens).join(", ")}
           </Text>
-          <Text style={styles.paragrafo}>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
             <Text style={styles.realce}>Descrição:</Text>{" "}
             {dados.description ?? "-"}
           </Text>
@@ -27,11 +32,13 @@ export default function CardDetalhesProjetos({ dados }) {
       <Pressable
         style={({ pressed }) => [
           styles.btn,
-          { backgroundColor: pressed ? "#3b82f6" : "#2563eb" },
+          { backgroundColor: pressed ? cores.botaoPressionado : cores.botao },
         ]}
         onPress={() => Linking.openURL(dados.html_url)}
       >
-        <Text style={styles.btnTxt}>Acessar repositório no Github</Text>
+        <Text style={[styles.btnTxt, { color: cores.textoPrincipal }]}>
+          Acessar repositório no Github
+        </Text>
       </Pressable>
     </View>
   );
@@ -47,7 +54,6 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   tituloSecao: {
-    color: "#f8fafc",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "left",
@@ -56,7 +62,6 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   paragrafo: {
-    color: "#94a3b8",
     fontSize: 18,
   },
   realce: {
@@ -68,7 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   btnTxt: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 16,
   },

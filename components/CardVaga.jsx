@@ -8,15 +8,17 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import descobrirCorBadge from "../utils/descobrirCorBadge";
+import { useTema } from "../contexts/TemaContext";
 
 export default function CardArtigo({ item, setCandidaturas }) {
   const navigation = useNavigation();
+  const { cores } = useTema();
 
   return (
     <Pressable
       style={({ pressed }) => [
         styles.cardContainer,
-        { backgroundColor: pressed ? "#2c3a50" : "#1e293b" },
+        { backgroundColor: pressed ? cores.cardsPressionado : cores.cards },
       ]}
       onPress={() =>
         navigation.navigate("DetalhesVaga", {
@@ -25,17 +27,25 @@ export default function CardArtigo({ item, setCandidaturas }) {
         })
       }
     >
-      <Text style={styles.tituloProjeto}>{item.cargo}</Text>
+      <Text style={[styles.tituloProjeto, { color: cores.textoPrincipal }]}>
+        {item.cargo}
+      </Text>
       <View style={styles.detalhesContainer}>
         <View style={styles.infoContainer}>
-          <Text style={styles.paragrafo}>{item.empresa}</Text>
-          <Text style={styles.paragrafo}>{item.localizacao}</Text>
-          <Text style={styles.paragrafo}>{item.dataPublicacao}</Text>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
+            {item.empresa}
+          </Text>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
+            {item.localizacao}
+          </Text>
+          <Text style={[styles.paragrafo, { color: cores.textoSecundario }]}>
+            {item.dataPublicacao}
+          </Text>
         </View>
         <View
           style={[
             styles.badge,
-            { backgroundColor: descobrirCorBadge(item.status)[0] },
+            { backgroundColor: cores[descobrirCorBadge(item.status)[0]] },
           ]}
         >
           <Text
@@ -43,9 +53,9 @@ export default function CardArtigo({ item, setCandidaturas }) {
               styles.badgeTxt,
               {
                 color:
-                  descobrirCorBadge(item.status)[0] === "#ffff00"
+                  descobrirCorBadge(item.status)[0] === "outrosStatus"
                     ? "#0f172a"
-                    : "#f8fafc",
+                    : cores.textoPrincipal,
               },
             ]}
           >
@@ -75,12 +85,10 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   tituloProjeto: {
-    color: "#f8fafc",
     fontWeight: "bold",
     fontSize: 18,
   },
   paragrafo: {
-    color: "#94a3b8",
     fontSize: 16,
   },
   badge: {

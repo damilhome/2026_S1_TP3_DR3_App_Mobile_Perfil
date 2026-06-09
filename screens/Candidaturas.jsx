@@ -11,9 +11,11 @@ import dadosCandidaturas from "../utils/dadosCandidaturas";
 import CardVaga from "../components/CardVaga";
 import { useEffect, useState } from "react";
 import { recuperarVaga } from "../utils/asyncStorage";
+import { useTema } from "../contexts/TemaContext";
 
 export default function Candidaturas() {
   const [candidaturas, setCandidaturas] = useState(dadosCandidaturas);
+  const { cores } = useTema();
 
   useEffect(() => {
     async function carregarValoresSalvos() {
@@ -34,8 +36,10 @@ export default function Candidaturas() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.tituloSecao}>Vagas Disponíveis</Text>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
+      <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+        Vagas Disponíveis
+      </Text>
       <FlatList
         contentContainerStyle={styles.listaContainer}
         data={candidaturas}
@@ -51,13 +55,11 @@ export default function Candidaturas() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f172a",
     paddingHorizontal: 24,
     paddingTop: 24,
     gap: 8,
   },
   tituloSecao: {
-    color: "#f8fafc",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
@@ -66,8 +68,5 @@ const styles = StyleSheet.create({
   listaContainer: {
     width: "100%",
     gap: 15,
-  },
-  erro: {
-    color: "red",
   },
 });

@@ -8,15 +8,20 @@ import {
 } from "react-native";
 import dadosQualificacoes from "../utils/dadosQualificacoes";
 import CardHabilidade from "../components/CardHabilidade.jsx";
+import { useTema } from "../contexts/TemaContext.js";
 
 export default function Qualificacoes() {
+  const { cores } = useTema();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
       <ScrollView
         contentContainerStyle={styles.habilidadesContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.tituloSecao}>Habilidades e certificações</Text>
+        <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+          Habilidades e certificações
+        </Text>
         {dadosQualificacoes.map((qualificacao, index) => (
           <CardHabilidade key={index} qualificacao={qualificacao} />
         ))}
@@ -28,13 +33,11 @@ export default function Qualificacoes() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0f172a",
     padding: 24,
     paddingBottom: 36,
     gap: 8,
   },
   tituloSecao: {
-    color: "#f8fafc",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
