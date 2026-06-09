@@ -9,10 +9,29 @@ import {
 
 import dadosCandidaturas from "../utils/dadosCandidaturas";
 import CardVaga from "../components/CardVaga";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { recuperarVaga } from "../utils/asyncStorage";
 
 export default function Candidaturas() {
   const [candidaturas, setCandidaturas] = useState(dadosCandidaturas);
+
+  useEffect(() => {
+    async function carregarValoresSalvos() {
+      let listaAtualizada = [...dadosCandidaturas];
+
+      for (let i = 0; i < listaAtualizada.length; i++) {
+        const vagaSalva = await recuperarVaga(listaAtualizada[i].id);
+
+        if (vagaSalva) {
+          listaAtualizada[i] = vagaSalva;
+        }
+      }
+
+      setCandidaturas(listaAtualizada);
+    }
+
+    carregarValoresSalvos();
+  }, []);
 
   return (
     <View style={styles.container}>

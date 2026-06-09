@@ -6,8 +6,9 @@ import {
   Pressable,
   ActivityIndicator,
 } from "react-native";
-import descobrirCorBadge from "../utils/descobrirCorBadge";
 import { useState } from "react";
+import { salvarVaga } from "../utils/asyncStorage";
+import descobrirCorBadge from "../utils/descobrirCorBadge";
 
 export default function DetalhesVaga({ route }) {
   const { detalhesItem, setCandidaturas } = route.params;
@@ -21,6 +22,7 @@ export default function DetalhesVaga({ route }) {
       feedback: "Inscrição confirmada.",
     };
     setVaga(novosDados);
+    salvarVaga(novosDados);
 
     setCandidaturas((prevState) =>
       prevState.map((item) => {
