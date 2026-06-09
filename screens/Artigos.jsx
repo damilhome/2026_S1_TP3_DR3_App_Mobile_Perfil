@@ -28,7 +28,7 @@ export default function Artigos() {
         </Text>
       </View>
       {carregando ? (
-        <ActivityIndicator size="large" color="#3b82f6" />
+        <ActivityIndicator size="large" color={cores.botao} />
       ) : (
         <FlatList
           contentContainerStyle={styles.listaContainer}
@@ -37,7 +37,7 @@ export default function Artigos() {
           renderItem={({ item }) => <CardArtigo item={item} />}
         />
       )}
-      {erro && <Text style={styles.erro}>{erro}</Text>}
+      {erro && <Text style={{ color: cores.rejeitado }}>{erro}</Text>}
     </View>
   );
 }
@@ -63,10 +63,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   listaContainer: {
-    width: "100%",
     gap: 15,
-  },
-  erro: {
-    color: "red",
+    paddingBottom: 24,
   },
 });

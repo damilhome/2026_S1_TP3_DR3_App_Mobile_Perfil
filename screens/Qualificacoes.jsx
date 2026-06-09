@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    paddingBottom: 36,
     gap: 8,
   },
   tituloSecao: {
@@ -45,5 +44,6 @@ const styles = StyleSheet.create({
   },
   habilidadesContainer: {
     gap: 15,
+    paddingBottom: 24,
   },
 });

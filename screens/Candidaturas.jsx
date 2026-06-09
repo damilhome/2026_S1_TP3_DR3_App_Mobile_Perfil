@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   listaContainer: {
-    width: "100%",
     gap: 15,
+    paddingBottom: 24,
   },
 });
