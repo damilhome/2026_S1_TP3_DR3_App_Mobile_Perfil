@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useState } from "react";
-import { salvarVaga } from "../utils/asyncStorage";
+import { salvarDados } from "../utils/asyncStorage";
 import { useTema } from "../contexts/TemaContext";
 import descobrirCorBadge from "../utils/descobrirCorBadge";
 
@@ -24,7 +24,7 @@ export default function DetalhesVaga({ route }) {
       feedback: "Inscrição confirmada.",
     };
     setVaga(novosDados);
-    salvarVaga(novosDados);
+    salvarDados(novosDados, `vaga${novosDados.id}`);
 
     setCandidaturas((prevState) =>
       prevState.map((item) => {

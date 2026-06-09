@@ -10,7 +10,7 @@ import {
 import dadosCandidaturas from "../utils/dadosCandidaturas";
 import CardVaga from "../components/CardVaga";
 import { useEffect, useState } from "react";
-import { recuperarVaga } from "../utils/asyncStorage";
+import { recuperarDados } from "../utils/asyncStorage";
 import { useTema } from "../contexts/TemaContext";
 
 export default function Candidaturas() {
@@ -22,7 +22,7 @@ export default function Candidaturas() {
       let listaAtualizada = [...dadosCandidaturas];
 
       for (let i = 0; i < listaAtualizada.length; i++) {
-        const vagaSalva = await recuperarVaga(listaAtualizada[i].id);
+        const vagaSalva = await recuperarDados(`vaga${listaAtualizada[i].id}`);
 
         if (vagaSalva) {
           listaAtualizada[i] = vagaSalva;

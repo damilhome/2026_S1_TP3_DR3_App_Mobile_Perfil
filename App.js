@@ -6,7 +6,9 @@ import DetalhesProjetos from "./screens/DetalhesProjetos.jsx";
 import DetalhesVaga from "./screens/DetalhesVaga.jsx";
 import DetalhesArtigo from "./screens/DetalhesArtigo.jsx";
 import Configuracoes from "./screens/Configuracoes.jsx";
+import EdicaoDadosPerfil from "./screens/EdicaoDadosPerfil.jsx";
 import { TemaProvider, useTema } from "./contexts/TemaContext.js";
+import { PerfilProvider } from "./contexts/PerfilContext.js";
 
 const Stack = createStackNavigator();
 
@@ -26,19 +28,25 @@ function AppNavigator() {
   };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={stackNavigatorStyles}
-      >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Perfil" component={Perfil} />
-        <Stack.Screen name="DetalhesProjetos" component={DetalhesProjetos} />
-        <Stack.Screen name="DetalhesVaga" component={DetalhesVaga} />
-        <Stack.Screen name="DetalhesArtigo" component={DetalhesArtigo} />
-        <Stack.Screen name="Configuracoes" component={Configuracoes} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PerfilProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={stackNavigatorStyles}
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Perfil" component={Perfil} />
+          <Stack.Screen name="DetalhesProjetos" component={DetalhesProjetos} />
+          <Stack.Screen name="DetalhesVaga" component={DetalhesVaga} />
+          <Stack.Screen name="DetalhesArtigo" component={DetalhesArtigo} />
+          <Stack.Screen name="Configuracoes" component={Configuracoes} />
+          <Stack.Screen
+            name="EdicaoDadosPerfil"
+            component={EdicaoDadosPerfil}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PerfilProvider>
   );
 }
 

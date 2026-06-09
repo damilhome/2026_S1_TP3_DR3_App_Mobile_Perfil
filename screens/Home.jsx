@@ -7,9 +7,29 @@ import {
   Pressable,
 } from "react-native";
 import { useTema } from "../contexts/TemaContext";
+import { useState, useEffect } from "react";
+import { usePerfil } from "../contexts/PerfilContext";
+import { recuperarDados } from "../utils/asyncStorage";
 
 export default function Home({ navigation }) {
   const { cores } = useTema();
+  const { perfil, setPerfil } = usePerfil();
+
+  useEffect(() => {
+    async function carregarValoresSalvos() {
+      let perfilAtualizado = { ...perfil };
+
+      const perfilSalvo = await recuperarDados(`dadosPerfil`);
+
+      if (perfilSalvo) {
+        perfilAtualizado = perfilSalvo;
+      }
+
+      setPerfil(perfilAtualizado);
+    }
+
+    carregarValoresSalvos();
+  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
@@ -24,31 +44,16 @@ export default function Home({ navigation }) {
           />
           <View style={styles.tituloContainer}>
             <Text style={[styles.nome, { color: cores.textoPrincipal }]}>
-              Danilo Almeida Milhome
+              {perfil.nome}
             </Text>
             <Text style={[styles.titulo, { color: cores.textoPrincipal }]}>
-              Desenvolvedor Full Stack
+              {perfil.titulo}
             </Text>
           </View>
         </View>
         <View style={styles.descricaoContainer}>
           <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
-            aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
-            dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
-            laboriosam recusandae esse.
-          </Text>
-          <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
-            aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
-            dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
-            laboriosam recusandae esse.
-          </Text>
-          <Text style={[styles.descricao, { color: cores.textoPrincipal }]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis
-            aspernatur, assumenda cumque sapiente ducimus quo aliquid atque
-            dolore, magni nam, ex dicta dolorem exercitationem voluptate unde
-            laboriosam recusandae esse.
+            {perfil.descricao}
           </Text>
         </View>
       </ScrollView>
@@ -56,7 +61,7 @@ export default function Home({ navigation }) {
         style={({ pressed }) => [
           styles.btn,
           {
-            backgroundColor: pressed ? "#3b82f6" : "#2563eb",
+            backgroundColor: pressed ? cores.botaoPressionado : cores.botao,
           },
         ]}
         onPress={() => navigation.navigate("Perfil")}
