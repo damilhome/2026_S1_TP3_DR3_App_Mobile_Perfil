@@ -5,7 +5,7 @@ import {
   FlatList,
   Pressable,
   ActivityIndicator,
-} from "react-native";
+} from "react-native"; 
 
 import useFetch from "../hooks/useFetch";
 import CardProjetos from "../components/CardProjetos";

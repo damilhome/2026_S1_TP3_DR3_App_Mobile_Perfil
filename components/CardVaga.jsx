@@ -9,7 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import descobrirCorBadge from "../utils/descobrirCorBadge";
 
-export default function CardVaga({ item, setCandidaturas }) {
+export default function CardArtigo({ item, setCandidaturas }) {
   const navigation = useNavigation();
 
   return (

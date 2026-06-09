@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     borderRadius: 8,
-    backgroundColor: "blue",
   },
   btnTxt: {
     color: "#f8fafc",
