@@ -5,6 +5,9 @@ import {
   Switch,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { usePerfil } from "../contexts/PerfilContext";
@@ -32,75 +35,89 @@ export default function EdicaoDadosPerfil() {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: cores.corDeFundo }]}>
-      <View>
-        <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
-          Editar dados
-        </Text>
-        <View style={styles.inputsContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={[styles.label, { color: cores.textoPrincipal }]}>
-              Nome
-            </Text>
-            <TextInput
-              style={[
-                styles.input,
-                { color: cores.textoPrincipal, borderColor: cores.borda },
-              ]}
-              value={nome}
-              onChangeText={setNome}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={[styles.label, { color: cores.textoPrincipal }]}>
-              Titulo
-            </Text>
-            <TextInput
-              style={[
-                styles.input,
-                { color: cores.textoPrincipal, borderColor: cores.borda },
-              ]}
-              value={titulo}
-              onChangeText={setTitulo}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={[styles.label, { color: cores.textoPrincipal }]}>
-              Descrição
-            </Text>
-            <TextInput
-              style={[
-                styles.input,
-                { color: cores.textoPrincipal, borderColor: cores.borda },
-              ]}
-              value={descricao}
-              onChangeText={setDescricao}
-              multiline={true}
-              numberOfLines={15}
-              textAlignVertical="top"
-              scrollEnabled={true}
-            />
+    <KeyboardAvoidingView
+      style={[styles.container, { backgroundColor: cores.corDeFundo }]}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View>
+          <Text style={[styles.tituloSecao, { color: cores.textoPrincipal }]}>
+            Editar dados
+          </Text>
+          <View style={styles.inputsContainer}>
+            <View style={styles.inputContainer}>
+              <Text style={[styles.label, { color: cores.textoPrincipal }]}>
+                Nome
+              </Text>
+              <TextInput
+                style={[
+                  styles.input,
+                  { color: cores.textoPrincipal, borderColor: cores.borda },
+                ]}
+                value={nome}
+                onChangeText={setNome}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={[styles.label, { color: cores.textoPrincipal }]}>
+                Titulo
+              </Text>
+              <TextInput
+                style={[
+                  styles.input,
+                  { color: cores.textoPrincipal, borderColor: cores.borda },
+                ]}
+                value={titulo}
+                onChangeText={setTitulo}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={[styles.label, { color: cores.textoPrincipal }]}>
+                Descrição
+              </Text>
+              <TextInput
+                style={[
+                  styles.input,
+                  { color: cores.textoPrincipal, borderColor: cores.borda },
+                ]}
+                value={descricao}
+                onChangeText={setDescricao}
+                multiline={true}
+                numberOfLines={15}
+                textAlignVertical="top"
+                scrollEnabled={true}
+              />
+            </View>
           </View>
         </View>
-      </View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.btn,
-          { backgroundColor: pressed ? cores.botaoPressionado : cores.botao },
-        ]}
-        onPress={salvar}
-      >
-        <Text style={[styles.btnTxt, { color: cores.textoPrincipal }]}>
-          Salvar
-        </Text>
-      </Pressable>
-    </View>
+        <Pressable
+          style={({ pressed }) => [
+            styles.btn,
+            { backgroundColor: pressed ? cores.botaoPressionado : cores.botao },
+          ]}
+          onPress={salvar}
+        >
+          <Text style={[styles.btnTxt, { color: cores.textoPrincipal }]}>
+            Salvar
+          </Text>
+        </Pressable>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: "space-between",
     gap: 8,
     padding: 24,
